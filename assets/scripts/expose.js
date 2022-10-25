@@ -6,12 +6,16 @@ function init() {
   // TODO
  
   const hornSelectElement = document.getElementById("horn-select");
-  const audio = document.getElementsByClassName(".hidden");
+  var audio = document.getElementsByClassName('hidden')[0];
+  var sound; 
+  const jsConfetti = new JSConfetti();
   //when horn-select is changed
   hornSelectElement.addEventListener('change', (event) => {
     //change image
-    var sound = hornSelectElement.value; 
+    sound = hornSelectElement.value; 
+
     console.log("Horn selected: "+ sound); 
+
     //ASK TA IF WE CAN ACCESS BY ALT
     var hornIMG = document.querySelector('img[alt="No image selected"]')
     hornIMG.src = 'assets/images/'+sound+'.svg';
@@ -19,7 +23,7 @@ function init() {
 
     //change audio file
     audio.src = 'assets/audio/'+sound+'.mp3';
-    console.log("Audio Element: "+ audio.src);
+    console.log("Audio file: "+ audio.src);
   });
 
   //change volume slider
@@ -49,9 +53,12 @@ function init() {
   console.log("play button: "+ playBtn);
 
   playBtn.addEventListener("click", (event) => {
-    console.log("play button: "+ playBtn);
+    console.log("play button had been clicked");
     audio.play(); 
+    console.log(audio.src);
+    if(sound == 'party-horn'){
+      console.log("confetti");
+      jsConfetti.addConfetti();
+    }
   }); 
-
-  // party horn:confetti
 }
